@@ -10,6 +10,17 @@ public class CurrencyDto {
     private String date;
     private BigDecimal result;
 
+
+    public CurrencyDto() {
+    }
+    public CurrencyDto(boolean success, RequestDto query, InfoDto info, String date, BigDecimal result) {
+        this.success = success;
+        this.query = query;
+        this.info = info;
+        this.date = date;
+        this.result = result;
+    }
+
     public boolean isSuccess() {
         return success;
     }

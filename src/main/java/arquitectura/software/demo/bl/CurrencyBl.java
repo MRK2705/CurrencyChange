@@ -1,7 +1,7 @@
 package arquitectura.software.demo.bl;
 
 import arquitectura.software.demo.dto.CurrencyDto;
-import arquitectura.software.demo.dto.RequestDto;
+import arquitectura.software.demo.exceptions.ControllerExceptions;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -15,8 +15,8 @@ import java.math.BigDecimal;
 @Service
 public class CurrencyBl {
     public CurrencyDto obtain(String from, String to, BigDecimal amount) throws IOException {
-    if(amount.compareTo(BigDecimal.ZERO) < 0){
-        System.out.println("Amount must be greater than 0");
+    if(amount.compareTo(BigDecimal.ZERO) <= 0){
+        throw new IllegalArgumentException("The change amount must be greater than 0 or equal to 0");
     }
         OkHttpClient client = new OkHttpClient().newBuilder().build();
 

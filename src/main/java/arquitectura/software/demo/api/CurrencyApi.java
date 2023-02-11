@@ -7,8 +7,13 @@ import org.springframework.web.bind.annotation.*;
 import arquitectura.software.demo.bl.CurrencyBl;
 
 import java.math.BigDecimal;
-
+/**
+ * Clase que representa el api de la moneda
+ */
 @RestController
+/**
+ * Se define la ruta del api
+ */
 @RequestMapping("api/v1/currency")
 public class CurrencyApi {
     private CurrencyBl currencyBl;

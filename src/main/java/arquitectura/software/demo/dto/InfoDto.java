@@ -7,6 +7,14 @@ public class InfoDto {
     private BigInteger timestamp;
     private BigDecimal rate;
 
+    public InfoDto() {
+    }
+
+    public InfoDto(BigInteger timestamp, BigDecimal rate) {
+        this.timestamp = timestamp;
+        this.rate = rate;
+    }
+
     public BigInteger getTimestamp() {
         return timestamp;
     }
