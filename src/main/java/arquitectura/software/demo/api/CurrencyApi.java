@@ -1,10 +1,11 @@
 package arquitectura.software.demo.api;
 
 import arquitectura.software.demo.dto.RequestDto;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
+import arquitectura.software.demo.dto.ResponseDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import arquitectura.software.demo.bl.CurrencyBl;
 
 import java.math.BigDecimal;
@@ -14,6 +15,7 @@ import java.util.Map;
 @RequestMapping("api/v1/currency")
 public class CurrencyApi {
 
+    private static Logger logger = LoggerFactory.getLogger(CurrencyApi.class);
     private CurrencyBl currencyBl;
 
     public CurrencyApi(CurrencyBl currencyBl) {
@@ -21,11 +23,10 @@ public class CurrencyApi {
     }
 
     @GetMapping("/obtain")
-    public String obtain(@RequestHeader Map<String, String> headers) throws Exception {
-        String from = headers.get("from");
-        String to = headers.get("to");
-        BigDecimal amount = headers.get("amount") != null ? new BigDecimal(headers.get("amount")) : null;
-        currencyBl.obtain(from, to, amount);
-        return "Hello World";
+    public ResponseEntity<ResponseDto<RequestDto>> obtain(@RequestParam String from, @RequestParam String to, @RequestParam BigDecimal amount) throws Exception {
+        logger.info("Obtain currency from: " + from + " to: " + to + " amount: " + amount);
+        RequestDto requestDto = currencyBl.obtain(from, to, amount);
+        ResponseDto<RequestDto> responseDto = new ResponseDto<RequestDto>(requestDto, true, "Success");
+        return ResponseEntity.ok(responseDto);
     }
 }

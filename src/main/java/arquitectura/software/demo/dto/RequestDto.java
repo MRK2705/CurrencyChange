@@ -1,10 +1,12 @@
 package arquitectura.software.demo.dto;
 
+import java.math.BigDecimal;
+
 public class RequestDto {
 
         private String from;
         private String to;
-        private String amount;
+        private BigDecimal amount;
 
         public String getFrom() {
             return from;
@@ -22,11 +24,11 @@ public class RequestDto {
             this.to = to;
         }
 
-        public String getAmount() {
+        public BigDecimal getAmount() {
             return amount;
         }
 
-        public void setAmount(String amount) {
+        public void setAmount(BigDecimal amount) {
             this.amount = amount;
         }
 
