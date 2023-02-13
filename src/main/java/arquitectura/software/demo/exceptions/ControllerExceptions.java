@@ -7,11 +7,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class ControllerExceptions {
-    /**
-     * Maneja la excepcion de tipo IllegalArgumentException
-     * @param e
-     * @return
-     */
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ResponseDto> zeroException(IllegalArgumentException e) {
         ResponseDto responseDto = new ResponseDto(null, false, e.getMessage());

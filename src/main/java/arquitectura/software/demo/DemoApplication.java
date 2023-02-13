@@ -18,15 +18,17 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 
 		// assume SLF4J is bound to logback in the current environment
+
 		LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
 
-			//conectar xml de tipo rolling file
+		try {
 			JoranConfigurator configurator = new JoranConfigurator();
 			configurator.setContext(context);
-			// Call context.reset() to clear any previous configuration, e.g. default
-			// configuration. For multi-step configuration, omit calling context.reset().
 			context.reset();
 			configurator.doConfigure("src/main/java/logback.xml");
+		} catch (JoranException je) {
+			je.printStackTrace();
+		}
 		StatusPrinter.printInCaseOfErrorsOrWarnings(context);
 	}
 
